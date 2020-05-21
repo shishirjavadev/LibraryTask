@@ -12,6 +12,14 @@ import static org.junit.Assert.assertEquals;
 
 class LibraryApplicationTests extends AbstractTest{
 
+/*    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    private BookRepository bookRepository;*/
     @Override
     @Before
     public void setUp() {
@@ -19,7 +27,7 @@ class LibraryApplicationTests extends AbstractTest{
     }
 
     @Test
-    public void createProduct() throws Exception {
+    public void addBook() throws Exception {
         String uri = "/api/v1/books/";
         Book bookObj = new Book();
 
@@ -34,6 +42,24 @@ class LibraryApplicationTests extends AbstractTest{
         int status = mvcResult.getResponse().getStatus();
         assertEquals(201, status);
 
+    }
+
+    @Test
+    public void getAllBooksCount() throws Exception {
+        String uri = "/api/v1/books/all";
+
+
+        //String inputJson = super.mapToJson(bookObj);
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        Book[] bookList = super.mapFromJson(content, Book[].class);
+        System.out.println(content);
+        System.out.println(bookList.length);
+        assertEquals(7, bookList.length);
     }
 
 }
