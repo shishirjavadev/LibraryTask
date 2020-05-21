@@ -12,14 +12,6 @@ import static org.junit.Assert.assertEquals;
 
 class LibraryApplicationTests extends AbstractTest{
 
-/*    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
-    private BookRepository bookRepository;*/
     @Override
     @Before
     public void setUp() {
@@ -41,9 +33,7 @@ class LibraryApplicationTests extends AbstractTest{
 
         int status = mvcResult.getResponse().getStatus();
         assertEquals(201, status);
-        String content = mvcResult.getResponse().getContentAsString();
-        System.out.println("content  "+content);
-        assertEquals(content, "Product is created successfully");
+
     }
 
 }
