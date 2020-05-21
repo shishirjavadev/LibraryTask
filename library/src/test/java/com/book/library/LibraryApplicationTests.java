@@ -67,4 +67,23 @@ class LibraryApplicationTests extends AbstractTest{
         System.out.println(book.getId());
         assertEquals(1, book.getId().intValue());
     }
+    
+    @Test
+    public void deleteBookById() throws Exception {
+        String uri = "/api/v1/books/2";
+
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        System.out.println(status);
+        assertEquals(204, status);
+
+        String uriAll = "/api/v1/books/all";
+
+        MvcResult mvcResultAll = mvc.perform(MockMvcRequestBuilders.get(uriAll)).andReturn();
+        String content = mvcResultAll.getResponse().getContentAsString();
+        Book[] bookList = super.mapFromJson(content, Book[].class);
+        assertTrue(Arrays.asList(bookList).stream().
+                filter(book -> book.getId() == 2).collect(Collectors.toList()).size() == 0);
+    }
 }
