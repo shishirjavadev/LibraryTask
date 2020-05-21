@@ -62,4 +62,19 @@ class LibraryApplicationTests extends AbstractTest{
         assertEquals(7, bookList.length);
     }
 
+    @Test
+    public void getBookWithId() throws Exception {
+        String uri = "/api/v1/books/1";
+
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        Book book = super.mapFromJson(content, Book.class);
+        System.out.println(content);
+        System.out.println(book.getId());
+        assertEquals(1, book.getId().intValue());
+    }
 }
