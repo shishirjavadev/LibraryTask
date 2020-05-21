@@ -48,8 +48,6 @@ class LibraryApplicationTests extends AbstractTest{
     public void getAllBooksCount() throws Exception {
         String uri = "/api/v1/books/all";
 
-
-        //String inputJson = super.mapToJson(bookObj);
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)).andReturn();
 
         int status = mvcResult.getResponse().getStatus();
@@ -59,7 +57,7 @@ class LibraryApplicationTests extends AbstractTest{
         Book[] bookList = super.mapFromJson(content, Book[].class);
         System.out.println(content);
         System.out.println(bookList.length);
-        assertEquals(7, bookList.length);
+        assertTrue(bookList.length!=0);
     }
 
     @Test
