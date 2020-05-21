@@ -12,14 +12,6 @@ import static org.junit.Assert.assertEquals;
 
 class LibraryApplicationTests extends AbstractTest{
 
-/*    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
-    private BookRepository bookRepository;*/
     @Override
     @Before
     public void setUp() {
